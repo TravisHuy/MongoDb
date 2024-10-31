@@ -19,18 +19,18 @@ public class ProductController {
         return ResponseEntity.ok("Hello World");
     }
 
-    @GetMapping("products")
+    @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> listProducts= productService.getAllProducts();
         return ResponseEntity.ok(listProducts);
     }
-    @GetMapping("products/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<Optional<Product>> getProductById(@PathVariable String id){
         Optional<Product> product = productService.getProductById(id);
         return ResponseEntity.ok(product);
     }
 
-    @PutMapping("products/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody Product product) {
         Product updatedProduct = productService.updateProduct(id, product);
         if (updatedProduct != null) {
@@ -38,7 +38,7 @@ public class ProductController {
         }
         return ResponseEntity.notFound().build();
     }
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.createProduct(product));
     }
