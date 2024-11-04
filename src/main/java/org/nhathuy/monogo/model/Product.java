@@ -1,4 +1,4 @@
-package org.nhathuy.monogo;
+package org.nhathuy.monogo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

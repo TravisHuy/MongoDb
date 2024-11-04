@@ -1,5 +1,7 @@
-package org.nhathuy.monogo;
+package org.nhathuy.monogo.service;
 
+import org.nhathuy.monogo.model.Product;
+import org.nhathuy.monogo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

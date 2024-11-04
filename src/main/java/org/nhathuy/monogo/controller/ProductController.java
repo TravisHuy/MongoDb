@@ -1,5 +1,7 @@
-package org.nhathuy.monogo;
+package org.nhathuy.monogo.controller;
 
+import org.nhathuy.monogo.service.ProductService;
+import org.nhathuy.monogo.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
