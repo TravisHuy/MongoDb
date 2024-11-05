@@ -15,7 +15,7 @@ public class Notification {
     private String id;
     private String title;
     private String content;
-    private byte[] imageData;
+    private String imageData;
     private String hotline;
     private Date date;
 }

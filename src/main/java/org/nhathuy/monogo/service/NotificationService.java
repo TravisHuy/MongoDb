@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,8 @@ public class NotificationService {
         notification.setDate(new Date());
 
         if (imageFile !=null && !imageFile.isEmpty()){
-            notification.setImageData(imageFile.getBytes());
+            String base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());
+            notification.setImageData(base64Image);
         }
         return notificationRepository.save(notification);
     }
@@ -43,7 +45,8 @@ public class NotificationService {
             updateNotification.setDate(new Date());
 
             if (imageFile !=null && !imageFile.isEmpty()){
-                updateNotification.setImageData(imageFile.getBytes());
+                String base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());
+                updateNotification.setImageData(base64Image);
             }
             return notificationRepository.save(updateNotification);
         }
