@@ -17,6 +17,9 @@ public class NotificationService {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Autowired
+    private WebSocketService webSocketService;
+
     public Notification getNotificationById(String id){
         return notificationRepository.findById(id).orElse(null);
     }
@@ -31,6 +34,9 @@ public class NotificationService {
             String base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());
             notification.setImageData(base64Image);
         }
+
+        webSocketService.sendNotification(notification);
+
         return notificationRepository.save(notification);
     }
     public List<Notification> getAllProducts(){
@@ -48,6 +54,9 @@ public class NotificationService {
                 String base64Image = Base64.getEncoder().encodeToString(imageFile.getBytes());
                 updateNotification.setImageData(base64Image);
             }
+
+            webSocketService.sendNotification(updateNotification);
+
             return notificationRepository.save(updateNotification);
         }
         return null;
