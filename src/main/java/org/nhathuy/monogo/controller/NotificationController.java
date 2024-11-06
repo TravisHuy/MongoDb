@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("travishuy/notifications")
 public class NotificationController {
@@ -54,8 +54,20 @@ public class NotificationController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Notification> deleteNotification(@PathVariable String id){
-        notificationService.deleteNotification(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> deleteNotification(@PathVariable String id){
+        try {
+            // Kiểm tra notification có tồn tại không
+            Notification notification = notificationService.getNotificationById(id);
+            if (notification == null) {
+                return new ResponseEntity<>("Notification not found", HttpStatus.NOT_FOUND);
+            }
+
+            // Thực hiện xóa
+            notificationService.deleteNotification(id);
+            return new ResponseEntity<>("Notification deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error deleting notification: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

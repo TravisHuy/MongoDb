@@ -61,7 +61,16 @@ public class NotificationService {
         }
         return null;
     }
-    public void deleteNotification(String id) {
-        notificationRepository.deleteById(id);
+    public boolean deleteNotification(String id) {
+        try {
+            Notification notification = getNotificationById(id);
+            if (notification != null) {
+                notificationRepository.deleteById(id);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting notification: " + e.getMessage());
+        }
     }
 }
